@@ -78,7 +78,7 @@ export default function SearchPage() {
     <div>
       <input
         type="text"
-        placeholder="Search..."
+        placeholder="..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         className="px-1 border border-gray-300 mb-6 focus:outline-none focus:ring-2 focus:ring-gray-200"
@@ -103,7 +103,6 @@ const Result = ({ result }: { result: ResultType }) => {
     async function fetchData() {
       const resultData = await result.data();
       resultData.url = replaceUrl(resultData.url);
-      console.log(JSON.stringify(resultData));
       setData(resultData);
     }
     fetchData();
