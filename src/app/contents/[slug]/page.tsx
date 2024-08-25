@@ -30,7 +30,7 @@ export default async function Article({
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-2">{article.title}</h1>
+      <h1 className="font-bold mb-2">{article.title}</h1>
       <p className="text-sm text-gray-500 mb-4">{article.date}</p>
       <div className="prose">
         <MDXRemote source={article.content} />
