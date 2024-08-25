@@ -1,14 +1,17 @@
 import fs from "fs";
-import path from "path";
 import matter from "gray-matter";
+import path from "path";
 
-const articlesDirectory = path.join(process.cwd(), "content/articles");
+const articlesDirectory = path.join(process.cwd(), "contents");
 
 export function getArticleSlugs(): string[] {
   return fs.readdirSync(articlesDirectory);
 }
 
-export function getArticleBySlug(slug: string | undefined, fields: string[] = []): Record<string, any> {
+export function getArticleBySlug(
+  slug: string | undefined,
+  fields: string[] = [],
+): Record<string, any> {
   if (!slug) {
     console.error("Slug is undefined");
     return {};

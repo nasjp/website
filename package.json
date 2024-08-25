@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && pagefind --site .next --output-path public/pagefind",
     "start": "next start",
     "lint": "next lint"
   },
@@ -13,12 +13,15 @@
     "@mdx-js/react": "^3.0.1",
     "@next/mdx": "^14.2.6",
     "@types/mdx": "^2.0.13",
+    "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "next": "14.2.6",
     "next-mdx-remote": "^5.0.0",
+    "pagefind": "^1.1.0",
     "react": "^18",
     "react-dom": "^18",
-    "swr": "^2.2.5"
+    "swr": "^2.2.5",
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -27,6 +30,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.6",
     "postcss": "^8",
+    "prettier-plugin-organize-imports": "^4.0.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
