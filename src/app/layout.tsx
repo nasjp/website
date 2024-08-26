@@ -8,6 +8,18 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "nasjp",
   description: "nasjp's website",
+  icons: [
+    {
+      url: "/favicon/android-chrome-192x192.png",
+      sizes: "192x192",
+      type: "image/png",
+    },
+    {
+      url: "/favicon/android-chrome-512x512.png",
+      sizes: "512x512",
+      type: "image/png",
+    },
+  ],
 };
 
 export default function RootLayout({
