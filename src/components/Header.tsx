@@ -19,11 +19,16 @@ export const Header = () => {
   };
 
   return (
-    <header className="">
-      <Link href="/">
-        <h1 className="font-bold">NASJP</h1>
-      </Link>
-      <nav>
+    <header>
+      <div>
+        <div className="fixed top-0 left-0 bg-white w-full h-12 z-5"></div>
+      </div>
+      <div className="fixed top-4 left-4 md:top-12 md:left-12 w-full z-10 bg-white">
+        <Link href="/">
+          <h1 className="font-bold">NASJP</h1>
+        </Link>
+      </div>
+      <nav className="mt-8">
         <ul className="flex flex-col">
           <li
             className={getLinkClassName(
