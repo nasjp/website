@@ -4,29 +4,36 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && pagefind --site .next --output-path public/pagefind",
+    "build": "next build",
+    "postbuild": "npm run indexcontents",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "indexcontents": "dotenv -e .env -- tsx src/scripts/indexContents.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@next/mdx": "^14.2.6",
     "@types/mdx": "^2.0.13",
+    "algoliasearch": "^4.24.0",
     "clsx": "^2.1.1",
+    "dotenv-cli": "^7.4.2",
     "gray-matter": "^4.0.3",
+    "instantsearch.css": "^8.5.0",
     "next": "14.2.6",
     "next-mdx-remote": "^5.0.0",
-    "pagefind": "^1.1.0",
     "react": "^18",
     "react-dom": "^18",
-    "swr": "^2.2.5",
-    "tailwind-merge": "^2.5.2"
+    "react-instantsearch-dom": "^6.40.4",
+    "tailwind-merge": "^2.5.2",
+    "tsx": "^4.18.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-instantsearch-dom": "^6.12.8",
     "eslint": "^8",
     "eslint-config-next": "14.2.6",
     "postcss": "^8",

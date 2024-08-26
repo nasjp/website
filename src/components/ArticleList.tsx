@@ -7,8 +7,8 @@ interface ArticleListProps {
   category?: ContentType;
 }
 
-export const ArticleList = ({ category }: ArticleListProps) => {
-  const articles = getAllArticles(["title", "slug", "category"]);
+export const ArticleList = async ({ category }: ArticleListProps) => {
+  const articles = await getAllArticles();
   return (
     <>
       <div className="font-bold text-gray-400">

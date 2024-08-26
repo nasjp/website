@@ -1,20 +1,21 @@
+import { Article, ContentType, StatusType } from "@/lib/types";
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
+import { genMetmuseumObjectId, getImageUrl } from "./metmuseum";
 
 const articlesDirectory = path.join(process.cwd(), "contents");
 
-export function getArticleSlugs(): string[] {
+export const getArticleSlugs = (): string[] => {
   return fs.readdirSync(articlesDirectory);
-}
+};
 
-export function getArticleBySlug(
-  slug: string | undefined,
-  fields: string[] = [],
-): Record<string, any> {
-  if (!slug) {
+export const getArticleBySlug = async (
+  slug: string,
+): Promise<Article | null> => {
+  if (slug === "") {
     console.error("Slug is undefined");
-    return {};
+    return null;
   }
 
   const realSlug = slug.replace(/\.mdx$/, "");
@@ -22,34 +23,38 @@ export function getArticleBySlug(
 
   if (!fs.existsSync(fullPath)) {
     console.error(`File not found: ${fullPath}`);
-    return {};
+    return null;
   }
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
-  const items: Record<string, any> = {};
+  const imageUrl = await getImageUrl(genMetmuseumObjectId(realSlug));
 
-  fields.forEach((field) => {
-    if (field === "slug") {
-      items[field] = realSlug;
-    }
-    if (field === "content") {
-      items[field] = content;
-    }
-    if (typeof data[field] !== "undefined") {
-      items[field] = data[field];
-    }
-  });
+  const title = (data.title as string) || realSlug;
+  const category = (data.category as ContentType) || "articles";
+  const status = (data.status as StatusType) || "archived";
+  const date = new Date(data.datetime) || new Date();
+  return {
+    slug: realSlug,
+    title: title,
+    datetime: date,
+    category: category,
+    status: status,
+    content: content,
+    excerpt: (data.excerpt as string) || "",
+    imageUrl: imageUrl,
+  };
+};
 
-  return items;
-}
-
-export function getAllArticles(fields: string[] = []): Record<string, any>[] {
+export const getAllArticles = async (): Promise<Article[]> => {
   const slugs = getArticleSlugs();
-  const articles = slugs
-    .map((slug) => getArticleBySlug(slug, fields))
-    .filter((article) => Object.keys(article).length > 0)
-    .sort((article1, article2) => (article1.date > article2.date ? -1 : 1));
+  const articles = (
+    await Promise.all(slugs.map((slug) => getArticleBySlug(slug)))
+  )
+    .filter((article): article is Article => article !== null)
+    .sort((article1, article2) =>
+      article1.datetime > article2.datetime ? -1 : 1,
+    );
   return articles;
-}
+};

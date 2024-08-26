@@ -1,4 +1,17 @@
+export type StatusType = "published" | "draft" | "archived";
+
 export type ContentType = "articles" | "works" | "links" | "about";
+
+export type Article = {
+  slug: string;
+  title: string;
+  datetime: Date;
+  category: ContentType;
+  status: StatusType;
+  content: string;
+  excerpt: string;
+  imageUrl: string;
+};
 
 export const contentColors: Record<ContentType, string> = {
   articles: "text-green-500",
