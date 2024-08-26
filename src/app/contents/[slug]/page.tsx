@@ -30,18 +30,80 @@ export const generateMetadata = async (
   };
 };
 
+const getLanguageFromFilename = (filename: string): string => {
+  const extensionMap: { [key: string]: string } = {
+    js: "javascript",
+    ts: "typescript",
+    py: "python",
+    rb: "ruby",
+    java: "java",
+    cpp: "cpp",
+    cs: "csharp",
+    go: "go",
+    rs: "rust",
+    php: "php",
+    html: "html",
+    css: "css",
+    json: "json",
+    yml: "yaml",
+    yaml: "yaml",
+    md: "markdown",
+    sh: "bash",
+    bash: "bash",
+    sql: "sql",
+  };
+
+  const specialCases: { [key: string]: string } = {
+    Dockerfile: "dockerfile",
+    Makefile: "makefile",
+    package: "json",
+  };
+
+  if (specialCases[filename]) {
+    return specialCases[filename];
+  }
+
+  const ext = filename.split(".").pop()?.toLowerCase();
+  return ext ? extensionMap[ext] || ext : "";
+};
+
 const components = {
   code: ({ node, inline, className, children, ...props }: any) => {
-    const match = /language-(\w+)/.exec(className || "");
-    return !inline && match ? (
-      <SyntaxHighlighter
-        style={base16AteliersulphurpoolLight}
-        language={match[1]}
-        PreTag="div"
-        {...props}
-      >
-        {String(children).replace(/\n$/, "")}
-      </SyntaxHighlighter>
+    const match = /language-(\S+)/.exec(className || "");
+
+    let displayLanguage = "";
+    let displayText = "";
+
+    if (match) {
+      const [, languageAndFilename] = match;
+      const parts = languageAndFilename.split(".");
+
+      if (parts.length > 1) {
+        displayLanguage = parts.pop() || "";
+        displayText = languageAndFilename;
+      } else {
+        displayText = languageAndFilename;
+        displayLanguage = getLanguageFromFilename(languageAndFilename);
+      }
+    }
+
+    return !inline ? (
+      <div className="relative">
+        {displayText && (
+          <div className="absolute top-0 right-0 bg-gray-200 px-2 py-1 text-xs font-mono rounded-bl">
+            {displayText}
+          </div>
+        )}
+        <SyntaxHighlighter
+          style={base16AteliersulphurpoolLight}
+          language={displayLanguage}
+          PreTag="div"
+          customStyle={{ paddingTop: "2rem" }}
+          {...props}
+        >
+          {String(children).replace(/\n$/, "")}
+        </SyntaxHighlighter>
+      </div>
     ) : (
       <code className={className} {...props}>
         {children}
