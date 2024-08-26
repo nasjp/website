@@ -84,7 +84,9 @@ const Hit: React.FC<HitProps> = ({ hit }) => (
         </div>
         <div className="w-full text-left">
           <h2 className="font-semibold mb-1">{hit.title}</h2>
-          <p className="text-gray-600 text-sm whitespace-nowrap">{hit.date}</p>
+          <p className="text-gray-600 text-sm whitespace-nowrap">
+            {new Date(hit.date).toISOString()}
+          </p>
           <p className="text-gray-600 text-sm text-gray-300">{hit.category}</p>
         </div>
       </div>

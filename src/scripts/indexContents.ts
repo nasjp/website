@@ -15,7 +15,7 @@ const indexContents = async () => {
       return {
         objectID: article.slug,
         title: article.title,
-        date: article.datetime,
+        date: article.datetime.toISOString(),
         category: article.category,
         content: article.content,
         imageUrl: article.imageUrl,

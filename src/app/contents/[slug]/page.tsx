@@ -4,17 +4,17 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   const articles = await getAllArticles();
   return articles.map((article) => ({
     slug: article.slug,
   }));
-}
+};
 
-export async function generateMetadata(
+export const generateMetadata = async (
   { params }: { params: { slug: string } },
   parent: ResolvingMetadata,
-): Promise<Metadata> {
+): Promise<Metadata> => {
   const article = await getArticleBySlug(params.slug);
   if (!article) {
     return {
@@ -26,13 +26,13 @@ export async function generateMetadata(
     title: article.title,
     description: article.excerpt,
   };
+};
+
+interface ArticleProps {
+  params: { slug: string };
 }
 
-export default async function Article({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function Article({ params }: ArticleProps) {
   const article = await getArticleBySlug(params.slug);
   if (!article) {
     return notFound();
@@ -54,7 +54,7 @@ export default async function Article({
         />
       </div>
       <p className="text-gray-600 text-sm whitespace-nowrap">
-        {article.datetime.toLocaleDateString()}
+        {article.datetime.toISOString()}
       </p>
       <p className="text-gray-600 text-sm text-gray-300">{article.category}</p>
       <div>---</div>
