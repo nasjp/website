@@ -42,12 +42,12 @@ export const Header = () => {
           </li>
           <li
             className={getLinkClassName(
-              ["/category/links", "/category/all"],
-              "links",
+              ["/category/memos", "/category/all"],
+              "memos",
             )}
             // className="text-blue-500"
           >
-            <Link href={getConditionalLink("/category/links")}>Links</Link>
+            <Link href={getConditionalLink("/category/memos")}>Memos</Link>
           </li>
           <li
             className={getLinkClassName(

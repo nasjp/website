@@ -3,6 +3,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { base16AteliersulphurpoolLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export const generateStaticParams = async () => {
   const articles = await getAllArticles();
@@ -26,6 +28,26 @@ export const generateMetadata = async (
     title: `${article.title} | nasjp's website`,
     description: article.excerpt,
   };
+};
+
+const components = {
+  code: ({ node, inline, className, children, ...props }: any) => {
+    const match = /language-(\w+)/.exec(className || "");
+    return !inline && match ? (
+      <SyntaxHighlighter
+        style={base16AteliersulphurpoolLight}
+        language={match[1]}
+        PreTag="div"
+        {...props}
+      >
+        {String(children).replace(/\n$/, "")}
+      </SyntaxHighlighter>
+    ) : (
+      <code className={className} {...props}>
+        {children}
+      </code>
+    );
+  },
 };
 
 interface ArticleProps {
@@ -60,7 +82,7 @@ export default async function Article({ params }: ArticleProps) {
         {article.category}
       </p>
       <div className="prose mt-8">
-        <MDXRemote source={article.content} />
+        <MDXRemote source={article.content} components={components} />
       </div>
     </div>
   );

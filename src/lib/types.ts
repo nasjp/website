@@ -1,6 +1,6 @@
 export type StatusType = "published" | "draft" | "archived";
 
-export type ContentType = "articles" | "works" | "links" | "about";
+export type ContentType = "articles" | "works" | "memos" | "about";
 
 export type Article = {
   slug: string;
@@ -16,6 +16,6 @@ export type Article = {
 export const contentColors: Record<ContentType, string> = {
   articles: "text-green-500",
   works: "text-red-500",
-  links: "text-blue-500",
+  memos: "text-blue-500",
   about: "text-black",
 };
