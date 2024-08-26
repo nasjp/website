@@ -23,7 +23,7 @@ export const generateMetadata = async (
   }
 
   return {
-    title: article.title,
+    title: `${article.title} | nasjp's website`,
     description: article.excerpt,
   };
 };
@@ -40,8 +40,8 @@ export default async function Article({ params }: ArticleProps) {
 
   return (
     <div className="w-full max-w-xl">
-      <h1 className="font-bold my-2">{article.title}</h1>
-      <div className="w-full max-w-xl mx-auto h-60 flex justify-center items-center">
+      <h1 className="font-bold mb-2">{article.title}</h1>
+      <div className="w-full max-w-xl mx-auto h-60 flex justify-center items-center mb-2">
         <Image
           src={article.imageUrl}
           alt={article.title}
@@ -56,9 +56,10 @@ export default async function Article({ params }: ArticleProps) {
       <p className="text-gray-600 text-sm whitespace-nowrap">
         {article.datetime.toISOString()}
       </p>
-      <p className="text-gray-600 text-sm text-gray-300">{article.category}</p>
-      <div>---</div>
-      <div className="prose">
+      <p className="text-sm text-gray-600 font-thin underline">
+        {article.category}
+      </p>
+      <div className="prose mt-8">
         <MDXRemote source={article.content} />
       </div>
     </div>
