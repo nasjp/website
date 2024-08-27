@@ -1,11 +1,13 @@
 "use client";
-
 import { contentColors, ContentType } from "@/lib/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export const Header = () => {
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isRootPath = pathname === "/";
 
   const getLinkClassName = (wants: string[], contentType: ContentType) => {
     if (wants.includes(pathname)) {
@@ -18,18 +20,26 @@ export const Header = () => {
     return pathname === originalPath ? "/category/all" : originalPath;
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header>
-      <div>
-        <div className="fixed top-0 left-0 bg-white w-full h-12 z-10">
-          <div className="m-4 md:m-12 bg-white">
-            <Link href="/">
-              <h1 className="font-bold">NASJP</h1>
-            </Link>
-          </div>
+      <div className="fixed top-0 left-0 bg-white w-full h-12 z-10">
+        <div className="m-4 md:m-12 bg-white flex justify-between items-center">
+          <Link href="/">
+            <h1 className="font-bold">NASJP</h1>
+          </Link>
+          {!isRootPath && (
+            <button onClick={toggleMenu} className="md:hidden font-bold">
+              {isMenuOpen ? "CLOSE" : "MENU"}
+            </button>
+          )}
         </div>
       </div>
-      <nav className="mt-8">
+      <div className="h-[calc(1.6rem)] "></div>
+      <nav className={`${!isRootPath && !isMenuOpen ? "hidden md:block" : ""}`}>
         <ul className="flex flex-col">
           <li
             className={getLinkClassName(
