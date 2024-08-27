@@ -7,7 +7,7 @@ import { useState } from "react";
 export const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isRootPath = pathname === "/";
+  const isNotContentsPath = !pathname.includes("/contents/");
 
   const getLinkClassName = (wants: string[], contentType: ContentType) => {
     if (wants.includes(pathname)) {
@@ -31,7 +31,7 @@ export const Header = () => {
           <Link href="/">
             <h1 className="font-bold">NASJP</h1>
           </Link>
-          {!isRootPath && (
+          {!isNotContentsPath && (
             <button onClick={toggleMenu} className="md:hidden font-bold">
               {isMenuOpen ? "CLOSE" : "MENU"}
             </button>
@@ -39,7 +39,9 @@ export const Header = () => {
         </div>
       </div>
       <div className="h-[calc(1.6rem)] "></div>
-      <nav className={`${!isRootPath && !isMenuOpen ? "hidden md:block" : ""}`}>
+      <nav
+        className={`${!isNotContentsPath && !isMenuOpen ? "hidden md:block" : ""}`}
+      >
         <ul className="flex flex-col">
           <li
             className={getLinkClassName(
