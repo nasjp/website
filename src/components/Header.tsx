@@ -43,38 +43,52 @@ export const Header = () => {
         className={`${!isNotContentsPath && !isMenuOpen ? "hidden md:block" : ""}`}
       >
         <ul className="flex flex-col">
-          <li
-            className={getLinkClassName(
-              ["/category/works", "/category/all"],
-              "works",
-            )}
-            // className="text-red-400"
-          >
-            <Link href={getConditionalLink("/category/works")}>Works</Link>
+          <li>
+            <Link href={getConditionalLink("/category/works")}>
+              <span
+                className={getLinkClassName(
+                  ["/category/works", "/category/all"],
+                  "works",
+                )}
+              >
+                Works
+              </span>
+            </Link>
           </li>
-          <li
-            className={getLinkClassName(["/", "/category/all"], "articles")}
-            // className="text-green-400"
-          >
-            <Link href={getConditionalLink("/")}>Articles</Link>
+          <li>
+            <Link href={getConditionalLink("/")}>
+              <span
+                className={getLinkClassName(["/", "/category/all"], "articles")}
+                // className="text-green-500"
+              >
+                Articles
+              </span>
+            </Link>
           </li>
-          <li
-            className={getLinkClassName(
-              ["/category/memos", "/category/all"],
-              "memos",
-            )}
-            // className="text-blue-400"
-          >
-            <Link href={getConditionalLink("/category/memos")}>Memos</Link>
+          <li>
+            <Link href={getConditionalLink("/category/memos")}>
+              <span
+                className={getLinkClassName(
+                  ["/category/memos", "/category/all"],
+                  "memos",
+                )}
+                // className="text-blue-500"
+              >
+                Memos
+              </span>
+            </Link>
           </li>
-          <li
-            className={getLinkClassName(
-              ["/category/about", "/category/all"],
-              "about",
-            )}
-            // className="text-black"
-          >
-            <Link href={getConditionalLink("/category/about")}>About</Link>
+          <li>
+            <Link href={getConditionalLink("/category/about")}>
+              <span
+                className={getLinkClassName(
+                  ["/category/about", "/category/all"],
+                  "about",
+                )}
+              >
+                About
+              </span>
+            </Link>
           </li>
           <li className="text-gray-400">
             <Link href="/search">Search</Link>
