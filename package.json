@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "dotenv -e .env -- tsx src/scripts/saveContentImages.ts",
     "build": "next build",
     "postbuild": "npm run indexcontents",
     "start": "next start",

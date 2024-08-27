@@ -8,10 +8,28 @@ export const genMetmuseumObjectId = (input: string): string => {
   return metmuseumObjectIds.objectIDs[index].toString();
 };
 
-export const getImageUrl = async (objectId: string): Promise<string> => {
+interface MetmuseumObject {
+  objectID: string;
+  title: string;
+  artistDisplayName: string;
+  objectDate: string;
+  primaryImage: string;
+  isPublicDomain: boolean;
+}
+
+export const getImageData = async (
+  objectId: string,
+): Promise<MetmuseumObject> => {
   const response = await fetch(
     `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`,
   );
   const data = await response.json();
-  return data.primaryImage;
+  return {
+    objectID: data.objectID,
+    title: data.title || "Untitled",
+    artistDisplayName: data.artistDisplayName || "Unknown",
+    objectDate: data.objectDate || "Unknown",
+    primaryImage: data.primaryImage || "",
+    isPublicDomain: data.isPublicDomain,
+  };
 };

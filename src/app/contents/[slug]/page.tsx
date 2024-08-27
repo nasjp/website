@@ -1,4 +1,4 @@
-import { getAllArticles, getArticleBySlug } from "@/lib/mdx";
+import { getAllContents, getContentBySlug } from "@/lib/content";
 import type { Metadata, ResolvingMetadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
@@ -7,9 +7,9 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { base16AteliersulphurpoolLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export const generateStaticParams = async () => {
-  const articles = await getAllArticles();
-  return articles.map((article) => ({
-    slug: article.slug,
+  const contents = await getAllContents();
+  return contents.map((content) => ({
+    slug: content.slug,
   }));
 };
 
@@ -17,16 +17,16 @@ export const generateMetadata = async (
   { params }: { params: { slug: string } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> => {
-  const article = await getArticleBySlug(params.slug);
-  if (!article) {
+  const content = await getContentBySlug(params.slug);
+  if (!content) {
     return {
       title: "Not Found",
     };
   }
 
   return {
-    title: `${article.title} | nasjp's website`,
-    description: article.excerpt,
+    title: `${content.title} | nasjp's website`,
+    description: content.excerpt,
   };
 };
 
@@ -112,13 +112,13 @@ const components = {
   },
 };
 
-interface ArticleProps {
+interface ContentProps {
   params: { slug: string };
 }
 
-export default async function Article({ params }: ArticleProps) {
-  const article = await getArticleBySlug(params.slug);
-  if (!article) {
+export default async function Content({ params }: ContentProps) {
+  const content = await getContentBySlug(params.slug);
+  if (!content) {
     return notFound();
   }
 
@@ -126,8 +126,8 @@ export default async function Article({ params }: ArticleProps) {
     <div className="w-full max-w-xl">
       <div className="relative w-full max-w-screen-xl">
         <Image
-          src={article.imageUrl}
-          alt={article.title}
+          src={content.imageUrl}
+          alt={content.title}
           width={1080}
           height={1920}
           className="w-full h-auto object-contain"
@@ -135,18 +135,24 @@ export default async function Article({ params }: ArticleProps) {
           placeholder="blur"
           blurDataURL={"/blur.png"}
         />
+        <div className="bg-white/50 text-xs font-mono">
+          {content.imageTitle} by {content.imageArtistDisplayName}
+        </div>
+        <div className="bg-white/50 text-xs font-mono">
+          {content.imageObjectDate}
+        </div>
       </div>
       <div className="border-y border-black border-t-2 mt-8 py-2">
         <p className="text-sm text-gray-600 font-thin underline capitalize">
-          {article.category}
+          {content.category}
         </p>
-        <h1 className="font-bold my-2">{article.title}</h1>
+        <h1 className="font-bold my-2">{content.title}</h1>
         <p className="text-gray-600 text-sm whitespace-nowrap">
-          {article.datetime.toISOString()}
+          {content.datetime.toISOString()}
         </p>
       </div>
       <div className="prose mt-8">
-        <MDXRemote source={article.content} components={components} />
+        <MDXRemote source={content.content} components={components} />
       </div>
     </div>
   );

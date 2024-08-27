@@ -1,6 +1,6 @@
 import { ALGOLIA_APP_ID, ALGOLIA_INDEX_NAME } from "@/lib/algolia";
 import algoliasearch from "algoliasearch";
-import { getAllArticles } from "../lib/mdx";
+import { getAllContents } from "../lib/content";
 
 const ALGOLIA_WRITE_API_KEY = process.env.ALGOLIA_WRITE_API_KEY!;
 
@@ -8,17 +8,17 @@ const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_WRITE_API_KEY);
 const index = client.initIndex(ALGOLIA_INDEX_NAME);
 
 const indexContents = async () => {
-  const articles = await getAllArticles();
+  const contents = await getAllContents();
 
   const objects = await Promise.all(
-    articles.map(async (article) => {
+    contents.map(async (content) => {
       return {
-        objectID: article.slug,
-        title: article.title,
-        date: article.datetime.toISOString(),
-        category: article.category,
-        content: article.content,
-        imageUrl: article.imageUrl,
+        objectID: content.slug,
+        title: content.title,
+        date: content.datetime.toISOString(),
+        category: content.category,
+        content: content.content,
+        imageUrl: content.imageUrl,
       };
     }),
   );

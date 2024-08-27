@@ -1,5 +1,5 @@
-import { ArticleList } from "@/components/ArticleList";
+import { AllContents } from "@/components/AllContents";
 
 export default function Page() {
-  return <ArticleList category="articles" />;
+  return <AllContents category="articles" />;
 }

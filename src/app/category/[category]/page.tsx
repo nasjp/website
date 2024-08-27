@@ -1,4 +1,4 @@
-import { ArticleList } from "@/components/ArticleList";
+import { AllContents } from "@/components/AllContents";
 import { ContentType } from "@/lib/types";
 
 interface CategoryProps {
@@ -9,8 +9,8 @@ interface CategoryProps {
 
 export default function Category({ params }: CategoryProps) {
   if (params.category === "all") {
-    return <ArticleList />;
+    return <AllContents />;
   }
   const category = params.category as ContentType;
-  return <ArticleList category={category} />;
+  return <AllContents category={category} />;
 }
