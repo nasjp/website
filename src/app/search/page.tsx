@@ -87,7 +87,7 @@ const Hit: React.FC<HitProps> = ({ hit }) => (
           <p className="text-gray-600 text-sm whitespace-nowrap">
             {new Date(hit.date).toISOString()}
           </p>
-          <p className="text-sm text-gray-600 font-thin underline">
+          <p className="text-sm text-gray-600 font-thin underline capitalize">
             {hit.category}
           </p>
         </div>

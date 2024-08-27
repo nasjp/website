@@ -124,25 +124,27 @@ export default async function Article({ params }: ArticleProps) {
 
   return (
     <div className="w-full max-w-xl">
-      <h1 className="font-bold mb-2">{article.title}</h1>
-      <div className="w-full max-w-xl mx-auto h-60 flex justify-center items-center mb-2">
+      <div className="relative w-full max-w-screen-xl">
         <Image
           src={article.imageUrl}
           alt={article.title}
-          width={480}
-          height={320}
-          className="object-contain w-full h-full"
+          width={1080}
+          height={1920}
+          className="w-full h-auto object-contain"
           loading="lazy"
           placeholder="blur"
           blurDataURL={"/blur.png"}
         />
       </div>
-      <p className="text-gray-600 text-sm whitespace-nowrap">
-        {article.datetime.toISOString()}
-      </p>
-      <p className="text-sm text-gray-600 font-thin underline">
-        {article.category}
-      </p>
+      <div className="border-y border-black border-t-2 mt-8 py-2">
+        <p className="text-sm text-gray-600 font-thin underline capitalize">
+          {article.category}
+        </p>
+        <h1 className="font-bold my-2">{article.title}</h1>
+        <p className="text-gray-600 text-sm whitespace-nowrap">
+          {article.datetime.toISOString()}
+        </p>
+      </div>
       <div className="prose mt-8">
         <MDXRemote source={article.content} components={components} />
       </div>

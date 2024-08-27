@@ -21,13 +21,19 @@ export const Header = () => {
   return (
     <header>
       <div>
-        <div className="fixed top-0 left-0 bg-white w-full h-12 z-5"></div>
+        <div className="fixed top-0 left-0 bg-white w-full h-12 z-10">
+          <div className="m-4 md:m-12 bg-white">
+            <Link href="/">
+              <h1 className="font-bold">NASJP</h1>
+            </Link>
+          </div>
+        </div>
       </div>
-      <div className="fixed top-4 left-4 md:top-12 md:left-12 w-full z-10 bg-white">
+      {/* <div className="fixed top-4 left-4 md:top-12 md:left-12 w-full z-10 bg-white">
         <Link href="/">
           <h1 className="font-bold">NASJP</h1>
         </Link>
-      </div>
+      </div> */}
       <nav className="mt-8">
         <ul className="flex flex-col">
           <li
