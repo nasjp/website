@@ -131,7 +131,7 @@ export default async function Content({ params }: ContentProps) {
           width={1080}
           height={1920}
           className="w-full h-auto object-contain"
-          loading="lazy"
+          priority
           placeholder="blur"
           blurDataURL={"/blur.png"}
         />
