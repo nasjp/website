@@ -74,10 +74,9 @@ const Hit: React.FC<HitProps> = ({ hit }) => (
           <Image
             src={hit.imageUrl}
             alt={hit.title}
-            width={80}
-            height={80}
-            style={{ objectFit: "cover", width: "auto", height: "80px" }}
-            loading="lazy"
+            width={500}
+            height={500}
+            className="object-cover h-[80px] w-auto"
             placeholder="blur"
             blurDataURL={"/blur.png"}
           />
