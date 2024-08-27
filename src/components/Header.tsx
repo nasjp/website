@@ -50,6 +50,7 @@ export const Header = () => {
                   ["/category/works", "/category/all"],
                   "works",
                 )}
+                // className="text-red-500"
               >
                 Works
               </span>
