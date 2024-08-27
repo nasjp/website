@@ -29,11 +29,6 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      {/* <div className="fixed top-4 left-4 md:top-12 md:left-12 w-full z-10 bg-white">
-        <Link href="/">
-          <h1 className="font-bold">NASJP</h1>
-        </Link>
-      </div> */}
       <nav className="mt-8">
         <ul className="flex flex-col">
           <li
@@ -41,14 +36,10 @@ export const Header = () => {
               ["/category/works", "/category/all"],
               "works",
             )}
-            // className="text-red-500"
           >
             <Link href={getConditionalLink("/category/works")}>Works</Link>
           </li>
-          <li
-            className={getLinkClassName(["/", "/category/all"], "articles")}
-            // className="text-green-500"
-          >
+          <li className={getLinkClassName(["/", "/category/all"], "articles")}>
             <Link href={getConditionalLink("/")}>Articles</Link>
           </li>
           <li
@@ -56,7 +47,6 @@ export const Header = () => {
               ["/category/memos", "/category/all"],
               "memos",
             )}
-            // className="text-blue-500"
           >
             <Link href={getConditionalLink("/category/memos")}>Memos</Link>
           </li>
@@ -65,7 +55,6 @@ export const Header = () => {
               ["/category/about", "/category/all"],
               "about",
             )}
-            // className="text-black"
           >
             <Link href={getConditionalLink("/category/about")}>About</Link>
           </li>
