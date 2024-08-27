@@ -142,7 +142,7 @@ export default async function Content({ params }: ContentProps) {
           <div className="text-xs font-mono">{content.imageObjectDate}</div>
         </div>
       </div>
-      <div className="border-y border-black border-t-2 py-2">
+      <div className="border-y border-black border-t-2 py-2 md:my-8">
         <p className="text-sm text-gray-600 font-thin underline capitalize">
           {content.category}
         </p>
@@ -151,7 +151,7 @@ export default async function Content({ params }: ContentProps) {
           {content.datetime.toISOString()}
         </p>
       </div>
-      <div className="prose mt-8">
+      <div className="prose pt-2 md:mt-8">
         <MDXRemote source={content.content} components={components} />
       </div>
     </div>
