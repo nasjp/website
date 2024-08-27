@@ -46,10 +46,14 @@ export const Header = () => {
               ["/category/works", "/category/all"],
               "works",
             )}
+            // className="text-red-400"
           >
             <Link href={getConditionalLink("/category/works")}>Works</Link>
           </li>
-          <li className={getLinkClassName(["/", "/category/all"], "articles")}>
+          <li
+            className={getLinkClassName(["/", "/category/all"], "articles")}
+            // className="text-green-400"
+          >
             <Link href={getConditionalLink("/")}>Articles</Link>
           </li>
           <li
@@ -57,6 +61,7 @@ export const Header = () => {
               ["/category/memos", "/category/all"],
               "memos",
             )}
+            // className="text-blue-400"
           >
             <Link href={getConditionalLink("/category/memos")}>Memos</Link>
           </li>
@@ -65,6 +70,7 @@ export const Header = () => {
               ["/category/about", "/category/all"],
               "about",
             )}
+            // className="text-black"
           >
             <Link href={getConditionalLink("/category/about")}>About</Link>
           </li>
