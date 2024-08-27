@@ -135,14 +135,12 @@ export default async function Content({ params }: ContentProps) {
           placeholder="blur"
           blurDataURL={"/blur.png"}
         />
-        <div className="bg-white/50 text-xs font-mono">
+        <div className="text-xs font-mono mt-1">
           {content.imageTitle} by {content.imageArtistDisplayName}
         </div>
-        <div className="bg-white/50 text-xs font-mono">
-          {content.imageObjectDate}
-        </div>
+        <div className="text-xs font-mono">{content.imageObjectDate}</div>
       </div>
-      <div className="border-y border-black border-t-2 mt-8 py-2">
+      <div className="border-y border-black border-t-2 my-10 py-2">
         <p className="text-sm text-gray-600 font-thin underline capitalize">
           {content.category}
         </p>
@@ -151,7 +149,7 @@ export default async function Content({ params }: ContentProps) {
           {content.datetime.toISOString()}
         </p>
       </div>
-      <div className="prose mt-8">
+      <div className="prose">
         <MDXRemote source={content.content} components={components} />
       </div>
     </div>
