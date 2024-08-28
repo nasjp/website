@@ -67,9 +67,26 @@ const getLanguageFromFilename = (filename: string): string => {
   return ext ? extensionMap[ext] || ext : "";
 };
 
+interface Code {
+  props: { className: string; children: string };
+  type: string;
+}
+
+const isCodeBlock = (children: any): children is Code => {
+  return children.type === "code";
+};
+
 const components = {
-  code: ({ node, inline, className, children, ...props }: any) => {
-    const match = /language-(\S+)/.exec(className || "");
+  code: (props: JSX.IntrinsicAttributes & { children?: React.ReactNode }) => {
+    return (
+      <code
+        className="not-prose bg-gray-100 text-red-500 text-sm py-1 px-2 rounded-md mx-2"
+        {...props}
+      />
+    );
+  },
+  pre: ({ node, inline, className, children, ...props }: any) => {
+    const match = /language-(\S+)/.exec(children.props.className || "");
 
     let displayLanguage = "";
     let displayText = "";
@@ -90,7 +107,7 @@ const components = {
     return !inline ? (
       <div className="relative">
         {displayText && (
-          <div className="absolute top-0 right-0 bg-gray-200 px-2 py-1 text-xs font-mono rounded-bl">
+          <div className="not-prose absolute top-0 right-0 bg-gray-200 px-2 py-1 text-xs font-mono rounded-bl">
             {displayText}
           </div>
         )}
@@ -99,13 +116,14 @@ const components = {
           language={displayLanguage}
           PreTag="div"
           customStyle={{ paddingTop: "2rem" }}
+          className="not-prose"
           {...props}
         >
-          {String(children).replace(/\n$/, "")}
+          {String(children.props.children).replace(/\n$/, "")}
         </SyntaxHighlighter>
       </div>
     ) : (
-      <code className={className} {...props}>
+      <code className="bg-gray-200 text-red-500" {...props}>
         {children}
       </code>
     );
@@ -152,6 +170,7 @@ export default async function Content({ params }: ContentProps) {
         </p>
       </div>
       <div className="prose pt-2 md:mt-8">
+        {/* <MDXRemote source={content.content} components={components} /> */}
         <MDXRemote source={content.content} components={components} />
       </div>
     </div>
