@@ -155,7 +155,9 @@ export default async function Content({ params }: ContentProps) {
         />
         <div className="py-2">
           <div className="text-xs font-mono">
-            {content.imageTitle} by {content.imageArtistDisplayName}
+            {content.imageTitle}
+            {content.imageArtistDisplayName != "Unknown" &&
+              ` by ${content.imageArtistDisplayName}`}
           </div>
           <div className="text-xs font-mono">{content.imageObjectDate}</div>
         </div>
