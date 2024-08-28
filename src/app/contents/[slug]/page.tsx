@@ -67,20 +67,11 @@ const getLanguageFromFilename = (filename: string): string => {
   return ext ? extensionMap[ext] || ext : "";
 };
 
-interface Code {
-  props: { className: string; children: string };
-  type: string;
-}
-
-const isCodeBlock = (children: any): children is Code => {
-  return children.type === "code";
-};
-
 const components = {
   code: (props: JSX.IntrinsicAttributes & { children?: React.ReactNode }) => {
     return (
       <code
-        className="not-prose bg-gray-100 text-red-500 text-sm py-1 px-2 rounded-md mx-2"
+        className="not-prose bg-gray-100 text-red-500 text-sm py-1 px-2 rounded-md mx-2 break-all"
         {...props}
       />
     );
