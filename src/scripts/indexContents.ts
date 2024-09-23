@@ -19,11 +19,13 @@ const indexContents = async () => {
         category: content.category,
         content: content.content,
         imageUrl: content.imageUrl,
+        status: content.status,
       };
     }),
   );
 
   try {
+    await index.clearObjects();
     const { objectIDs } = await index.saveObjects(objects);
     console.log(`Indexed ${objectIDs.length} documents to Algolia`);
   } catch (error) {

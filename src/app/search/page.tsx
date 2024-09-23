@@ -14,6 +14,8 @@ import { connectSearchBox, Hits, InstantSearch } from "react-instantsearch-dom";
 
 const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_READ_API_KEY);
 
+const containsDraft = process.env.NEXT_PUBLIC_CONTAINS_DRAFT === "true";
+
 interface SearchBoxProps {
   refine: (value: string) => void;
   currentRefinement: string;
@@ -66,34 +68,38 @@ type HitProps = {
   hit: AlgoliaHit;
 };
 
-const Hit: React.FC<HitProps> = ({ hit }) => (
-  <Link href={`/contents/${hit.objectID}`} passHref legacyBehavior>
-    <div className="w-full mx-auto mb-4 cursor-pointer">
-      <div className="flex flex-col items-center">
-        <div className="w-full flex justify-start mb-2 h-[80px]">
-          <Image
-            src={hit.imageUrl}
-            alt={hit.title}
-            width={500}
-            height={500}
-            className="object-cover h-[80px] w-auto"
-            placeholder="blur"
-            blurDataURL={"/blur.png"}
-          />
-        </div>
-        <div className="w-full text-left">
-          <h2 className="font-semibold mb-1">{hit.title}</h2>
-          <p className="text-gray-600 text-sm whitespace-nowrap">
-            {new Date(hit.date).toISOString()}
-          </p>
-          <p className="text-sm text-gray-600 font-thin underline capitalize">
-            {hit.category}
-          </p>
-        </div>
+const Hit: React.FC<HitProps> = ({ hit }) => {
+  return containsDraft || hit.status === "published" ? (
+    <Link href={`/contents/${hit.objectID}`} passHref legacyBehavior>
+        <div className="w-full mx-auto mb-4 cursor-pointer">
+          <div className="flex flex-col items-center">
+            <div className="w-full flex justify-start mb-2 h-[80px]">
+              <Image
+                src={hit.imageUrl}
+                alt={hit.title}
+                width={500}
+                height={500}
+                className="object-cover h-[80px] w-auto"
+                placeholder="blur"
+                blurDataURL={"/blur.png"}
+              />
+            </div>
+            <div className="w-full text-left">
+              <h2 className="font-semibold mb-1">{hit.title}</h2>
+              <p className="text-gray-600 text-sm whitespace-nowrap">
+                {new Date(hit.date).toISOString()}
+              </p>
+              <p className="text-sm text-gray-600 font-thin underline capitalize">
+                {hit.category}
+              </p>
+            </div>
+          </div>
       </div>
-    </div>
-  </Link>
-);
+    </Link>
+  ) : (
+    <div></div>
+  );
+};
 
 const SearchPage: React.FC = () => {
   const [searchState, setSearchState] = useState({});
