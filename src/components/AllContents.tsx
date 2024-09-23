@@ -21,9 +21,7 @@ export const AllContents = async ({ category }: AllContentsProps) => {
           <span
             className={cn(
               "inline break-all hover:cursor-pointer",
-              !category || category === content.category
-                ? "text-black"
-                : "",
+              !category || category === content.category ? "text-black" : "",
             )}
           >
             {content.title}

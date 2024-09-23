@@ -1,5 +1,4 @@
 "use client";
-import { ContentType } from "@/lib/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -46,9 +45,10 @@ export const Header = () => {
           <li>
             <Link href={getConditionalLink("/category/works")}>
               <span
-                className={getLinkClassName(
-                  ["/category/works", "/category/all"],
-                )}
+                className={getLinkClassName([
+                  "/category/works",
+                  "/category/all",
+                ])}
               >
                 Works
               </span>
@@ -56,9 +56,7 @@ export const Header = () => {
           </li>
           <li>
             <Link href={getConditionalLink("/")}>
-              <span
-                className={getLinkClassName(["/", "/category/all"])}
-              >
+              <span className={getLinkClassName(["/", "/category/all"])}>
                 Articles
               </span>
             </Link>
@@ -66,9 +64,10 @@ export const Header = () => {
           <li>
             <Link href={getConditionalLink("/category/memos")}>
               <span
-                className={getLinkClassName(
-                  ["/category/memos", "/category/all"],
-                )}
+                className={getLinkClassName([
+                  "/category/memos",
+                  "/category/all",
+                ])}
               >
                 Memos
               </span>
@@ -76,22 +75,14 @@ export const Header = () => {
           </li>
           <li>
             <Link href={getConditionalLink("/about")}>
-              <span
-                className={getLinkClassName(
-                  ["/about", "/category/all"],
-                )}
-              >
+              <span className={getLinkClassName(["/about", "/category/all"])}>
                 About
               </span>
             </Link>
           </li>
           <li className="text-gray-400">
-              <span
-                className={getLinkClassName(
-                  ["/search", "/category/all"],
-                )}
-              >
-            <Link href="/search">Search</Link>
+            <span className={getLinkClassName(["/search", "/category/all"])}>
+              <Link href="/search">Search</Link>
             </span>
           </li>
         </ul>

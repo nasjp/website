@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -22,8 +22,8 @@ export default function About() {
         />
         <div className="py-2">
           <div className="text-xs font-mono">
-            Cardinal Fernando Niño de Guevara (1541–1609)
-            by El Greco (Domenikos Theotokopoulos)
+            Cardinal Fernando Niño de Guevara (1541–1609) by El Greco (Domenikos
+            Theotokopoulos)
           </div>
           <div className="text-xs font-mono">ca. 1600</div>
         </div>
@@ -35,8 +35,13 @@ export default function About() {
           <li>Software Engineer</li>
           <li>
             <a
-            className="underline"
-            href="https://kolumona.com" target="_blank" rel="noopener noreferrer">Kolumona</a>
+              className="underline"
+              href="https://kolumona.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Kolumona
+            </a>
           </li>
           <li>CTO</li>
         </ul>
@@ -52,22 +57,34 @@ export default function About() {
       </section>
       <section>
         <h2 className="text-xl font-semibold mb-4">History</h2>
-          <ul className="list-disc list-inside mb-4">
-            <li>Sophia University, Economics (2014-2017)</li>
-            <li>Mizuho Bank, Sales (2017-2018)</li>
-            <li>Lifematics, Software Engineer (2018-2019)</li>
-            <li>Elements, Software Engineer (2019-2024)</li>
-            <li>Kolumona, CTO (2024-)</li>
-          </ul>
+        <ul className="list-disc list-inside mb-4">
+          <li>Sophia University, Economics (2014-2017)</li>
+          <li>Mizuho Bank, Sales (2017-2018)</li>
+          <li>Lifematics, Software Engineer (2018-2019)</li>
+          <li>Elements, Software Engineer (2019-2024)</li>
+          <li>Kolumona, CTO (2024-)</li>
+        </ul>
       </section>
       <section>
         <h2 className="text-xl font-semibold mb-4">Contact</h2>
         <ul className="list-disc list-inside mb-4">
           <li>
-            <a href="https://twitter.com/nasjp_dev" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a
+              href="https://twitter.com/nasjp_dev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Twitter
+            </a>
           </li>
           <li>
-            <a href="https://github.com/nasjp" target="_blank" rel="noopener noreferrer">Github</a>
+            <a
+              href="https://github.com/nasjp"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Github
+            </a>
           </li>
         </ul>
       </section>
