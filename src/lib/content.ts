@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import path from "path";
 import { genMetmuseumObjectId, getImageData } from "./metmuseum";
 
-const prod = process.env.NODE_ENV === "production";
+const containsDraft = process.env.NEXT_PUBLIC_CONTAINS_DRAFT === "true";
 
 const contentsDirectory = path.join(process.cwd(), "contents");
 
@@ -61,7 +61,7 @@ export const getAllContents = async (): Promise<Content[]> => {
     await Promise.all(slugs.map((slug) => getContentBySlug(slug)))
   )
     .filter((content): content is Content => content !== null)
-    .filter((content) => !prod || content.status === "published")
+    .filter((content) => containsDraft || content.status === "published")
     .sort((content1, content2) =>
       content1.datetime > content2.datetime ? -1 : 1,
     );
