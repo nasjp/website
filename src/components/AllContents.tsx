@@ -10,7 +10,7 @@ interface AllContentsProps {
 export const AllContents = async ({ category }: AllContentsProps) => {
   const contents = await getAllContents();
   return (
-    <div className="font-bold text-gray-400">
+    <div className="font-semibold text-gray-400">
       {contents.map((content, index) => (
         <Link
           key={content.slug}
