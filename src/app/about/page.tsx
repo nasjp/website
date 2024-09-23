@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About | nasjp's website",
@@ -7,9 +8,28 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="w-full max-w-xl">
+      <div className="relative w-full max-w-screen-xl mb-8">
+        <Image
+          src="/about/images/about.jpg"
+          alt="about"
+          width={1080}
+          height={1920}
+          className="w-full h-auto object-contain"
+          priority
+          placeholder="blur"
+          blurDataURL={"/blur.png"}
+        />
+        <div className="py-2">
+          <div className="text-xs font-mono">
+            Cardinal Fernando Niño de Guevara (1541–1609)
+            by El Greco (Domenikos Theotokopoulos)
+          </div>
+          <div className="text-xs font-mono">ca. 1600</div>
+        </div>
+      </div>
       <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Profile</h2>
+        <h2 className="text-xl font-semibold mb-4">About</h2>
         <ul className="list-disc list-inside mb-4">
           <li>Yukihiro Taniguchi</li>
           <li>Software Engineer</li>
