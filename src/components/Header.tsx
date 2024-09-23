@@ -1,5 +1,5 @@
 "use client";
-import { contentColors, ContentType } from "@/lib/types";
+import { ContentType } from "@/lib/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -9,9 +9,9 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isNotContentsPath = !pathname.includes("/contents/");
 
-  const getLinkClassName = (wants: string[], contentType: ContentType) => {
+  const getLinkClassName = (wants: string[]) => {
     if (wants.includes(pathname)) {
-      return `${contentColors[contentType]}`;
+      return `font-semibold text-gray-400`;
     }
     return `text-gray-400`;
   };
@@ -48,9 +48,7 @@ export const Header = () => {
               <span
                 className={getLinkClassName(
                   ["/category/works", "/category/all"],
-                  "works",
                 )}
-                // className="text-red-500"
               >
                 Works
               </span>
@@ -59,8 +57,7 @@ export const Header = () => {
           <li>
             <Link href={getConditionalLink("/")}>
               <span
-                className={getLinkClassName(["/", "/category/all"], "articles")}
-                // className="text-green-500"
+                className={getLinkClassName(["/", "/category/all"])}
               >
                 Articles
               </span>
@@ -71,20 +68,17 @@ export const Header = () => {
               <span
                 className={getLinkClassName(
                   ["/category/memos", "/category/all"],
-                  "memos",
                 )}
-                // className="text-blue-500"
               >
                 Memos
               </span>
             </Link>
           </li>
           <li>
-            <Link href={getConditionalLink("/category/about")}>
+            <Link href={getConditionalLink("/about")}>
               <span
                 className={getLinkClassName(
-                  ["/category/about", "/category/all"],
-                  "about",
+                  ["/about", "/category/all"],
                 )}
               >
                 About
@@ -92,7 +86,13 @@ export const Header = () => {
             </Link>
           </li>
           <li className="text-gray-400">
+              <span
+                className={getLinkClassName(
+                  ["/search", "/category/all"],
+                )}
+              >
             <Link href="/search">Search</Link>
+            </span>
           </li>
         </ul>
       </nav>

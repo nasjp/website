@@ -18,10 +18,3 @@ export type Content = {
   rawImageUrl: string;
   imageUrl: string;
 };
-
-export const contentColors: Record<ContentType, string> = {
-  articles: "text-green-500",
-  works: "text-red-500",
-  memos: "text-blue-500",
-  about: "text-black",
-};

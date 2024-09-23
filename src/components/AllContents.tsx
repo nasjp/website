@@ -1,6 +1,6 @@
 import { cn } from "@/lib/cn";
 import { getAllContents } from "@/lib/content";
-import { contentColors, ContentType } from "@/lib/types";
+import { ContentType } from "@/lib/types";
 import Link from "next/link";
 
 interface AllContentsProps {
@@ -22,7 +22,7 @@ export const AllContents = async ({ category }: AllContentsProps) => {
             className={cn(
               "inline break-all hover:cursor-pointer",
               !category || category === content.category
-                ? contentColors[content.category as ContentType]
+                ? "text-black"
                 : "",
             )}
           >
